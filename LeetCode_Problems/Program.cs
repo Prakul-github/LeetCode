@@ -7,6 +7,31 @@ namespace LeetCode_Problems
     {
         static void Main(string[] args)
         {
+            GraphTheory_AllPathsTraversal();
+        }
+
+        static void GraphTheory_AllPathsTraversal()
+        {
+            Console.WriteLine("Solution to GraphTheory_AllPathsTraversal Problem");
+
+            LeetCode_Problems.GraphTheory.Solution solution = new GraphTheory.Solution();
+            IList<IList<int>> solutions = solution.AllPathsSourceTarget(new int[][] { new int[] { 1, 2 }, new int[] { 3 }, new int[] { 3 }, new int[] { } });
+
+            foreach (List<int> s in solutions)
+            {
+                foreach(int edge in s)
+                {
+                    Console.Write(edge);
+                    Console.Write(" ");
+                }
+                Console.WriteLine();
+            }
+
+            Console.ReadLine();
+        }
+        
+        private static void NQueensProblem()
+        {
             Console.WriteLine("Solution to NQueens Problem");
 
             // MarkNQueens Problem
