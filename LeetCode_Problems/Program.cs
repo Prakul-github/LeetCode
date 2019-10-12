@@ -7,7 +7,7 @@ namespace LeetCode_Problems
     {
         static void Main(string[] args)
         {
-            GraphTheory_AllPathsTraversal();
+            GraphTheory_AllPathsTraversal(); 
         }
 
         static void GraphTheory_AllPathsTraversal()
