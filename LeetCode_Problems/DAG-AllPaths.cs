@@ -19,16 +19,16 @@ namespace LeetCode_Problems.GraphTheory
 
             foreach(int[] subArray in graph)
             {
-                Vertice vertice = new Vertice();
+                Vertex Vertex = new Vertex();
 
                 // sort sub Array
 
                 foreach (int item in subArray)
                 {
-                    vertice.Edges.Add(item);
+                    Vertex.Edges.Add(item);
                 }
 
-                DAGgraph.Vertices[index++] = vertice;
+                DAGgraph.Vertices[index++] = Vertex;
             }
 
             IList<IList<int>> results = new List<IList<int>>();

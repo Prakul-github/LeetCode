@@ -5,12 +5,12 @@ using System.Text;
 
 namespace LeetCode_Problems.GraphTheory
 {
-    class Vertice 
+    class Vertex 
     {
         //public int index { get; set; }
         public List<int> Edges { get; set; }
 
-        public Vertice()
+        public Vertex()
         {
             Edges = new List<int>();
         }        
@@ -18,11 +18,11 @@ namespace LeetCode_Problems.GraphTheory
 
     class DAG
     {
-        public Vertice[] Vertices { get; set; }
+        public Vertex[] Vertices { get; set; }
 
         public DAG(int vertices)
         {
-           this.Vertices = new Vertice[vertices];
+           this.Vertices = new Vertex[vertices];
 
         }
 

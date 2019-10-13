@@ -4,9 +4,9 @@ using System.Text;
 
 namespace LeetCodeProblems
 {
-    class Program
+    class Program1
     {
-        static void Main(string[] args)
+        static void Main_old(string[] args)
         {
             //Test_KthSymbol_InGrammar();
             // Test_ReverseString();
