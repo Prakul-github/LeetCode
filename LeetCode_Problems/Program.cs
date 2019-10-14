@@ -9,7 +9,33 @@ namespace LeetCode_Problems
         {
             // GraphTheory_AllPathsTraversal(); 
             //GraphTheory_DijkstraAlgo();
-            BellmanFord_ShortestPath();
+            //BellmanFord_ShortestPath();
+            GraphTheory_FloydWarshallAlgo();
+        }
+
+        static void GraphTheory_FloydWarshallAlgo()
+        {
+            int[,] graph =  {
+                                { 0, 8, 0, 1 },
+                                { 0, 0, 1, 0 },
+                                { 4, 0, 0, 0 },
+                                { 0, 2, 9, 0 }
+                            };
+
+            ShortedPathAlgo algo = new ShortedPathAlgo();
+            List<int[,]> solutions = algo.FloydWarshall_AllpairsShortestPath(graph, 4);
+
+            Console.WriteLine("FloydWarshall's algo");
+
+            int iLoop = 0;
+            foreach(int[,] solution in solutions)
+            {
+                Console.WriteLine("--- Solution - {0} ---", iLoop++);
+                Helper.Print2DArray(solution, 4);
+                Console.WriteLine("---");
+            }
+            
+            Console.ReadLine();
         }
 
         static void BellmanFord_ShortestPath()

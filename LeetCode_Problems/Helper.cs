@@ -12,7 +12,33 @@ namespace LeetCode_Problems
             {
                 for (int col = 0; col < n; col++)
                 {
-                    Console.Write(solution[row, col]);
+                    Console.Write("{0} ", solution[row, col]);
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public static void Copy2DArray(int[,] source, int[,] destination, int n)
+        {
+            for (int row = 0; row < n; row++)
+            {
+                for (int col = 0; col < n; col++)
+                {
+                    destination[row, col] = source[row, col];
+                }                
+            }
+        }
+
+        public static void MarkNoDirectEdges(int[,] graph, int n)
+        {
+            for (int row = 0; row < n; row++)
+            {
+                for (int col = 0; col < n; col++)
+                {
+                    if(graph[row, col] == 0 && row != col)
+                    {
+                        graph[row, col] = int.MaxValue;
+                    }
                 }
                 Console.WriteLine();
             }

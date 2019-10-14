@@ -106,7 +106,7 @@ namespace LeetCode_Problems
                 {
                     int u = edge.Source;
                     int v = edge.Destination;
-                    int cost = edge.Destination;
+                    int cost = edge.Cost;
 
                     if(distance[u] + cost < distance[v] && distance[u] != int.MaxValue)
                     {
@@ -134,6 +134,74 @@ namespace LeetCode_Problems
             }
 
             return edges;
+        }
+
+        /// <summary>
+        /// Floyd-Warshall Algorithm is best suited for dense graphs since its complexity depends only on the number of vertices in the graph.
+        /// For sparse graphs, Johnson’s Algorithm is more suitable.
+        /// A dense graph is a graph in which the number of edges is close to the maximal number of edges. 
+        /// The opposite, a graph with only a few edges, is a sparse graph.
+        /// 
+        /// Step-01:         
+        /// Remove all the self loops and parallel edges(keeping the edge with lowest weight) from the graph if any.
+        /// In our case, we don’t have any self edge and parallel edge.
+        /// 
+        /// Step-02:
+        /// Now, write the initial distance matrix representing the distance between every pair of vertices 
+        /// as mentioned in the given graph in the form of weights.
+        /// For diagonal elements (representing self-loops), value = 0
+        /// For vertices having a direct edge between them, value = weight of that edge
+        /// For vertices having no direct edges between them, value = ∞
+        /// 
+        /// Step-03:
+        /// From step-03, we will start our actual solution.
+        /// 
+        /// https://www.gatevidyalay.com/algorithms/
+        /// </summary>
+        /// <param name="graph">n*n matrix</param>
+        /// <param name="source"></param>
+        /// <param name="vertextCount"></param>
+        /// <returns></returns>
+        public List<int[,]> FloydWarshall_AllpairsShortestPath(int[,] graph, int vertextCount)
+        {
+            List<int[,]> allPairsShortestPaths = new List<int[,]>();
+            
+            // set infinity for values that are zero
+            Helper.MarkNoDirectEdges(graph, vertextCount);
+
+            int[,] previousMatrix = graph;
+
+            // Loop through all the vertext to get shortest path for each vertext
+            for (int i = 0; i < vertextCount; i++)
+            {
+                int[,] matrix = new int[vertextCount,vertextCount];
+                                
+                Helper.Copy2DArray(previousMatrix, matrix, vertextCount);
+
+                for (int row = 0; row < vertextCount; row++)
+                {
+                    for(int col = 0; col < vertextCount; col++)
+                    {
+                        if (row == col)
+                        {
+                            matrix[row, col] = 0;
+                        }
+                        else if (previousMatrix[row, i] != int.MaxValue && previousMatrix[i, col] != int.MaxValue)
+                        {
+                            if (matrix[row, col] > previousMatrix[row, i] + previousMatrix[i, col])
+                            {
+                                matrix[row, col] = previousMatrix[row, i] + previousMatrix[i, col];
+                            }
+                        }
+                    }
+                }
+
+                allPairsShortestPaths.Add(matrix);
+
+                previousMatrix = matrix;
+            }
+
+            return allPairsShortestPaths;
         }
     }
 }
