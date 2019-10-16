@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LeetCode_Problems
+namespace LeetCodeProblems
 {
     static class Helper
     {
@@ -51,5 +51,25 @@ namespace LeetCode_Problems
                 Console.WriteLine("index {0} value {1}", iLoop, array[iLoop]);
             }
         }
+
+        public static void Initialise2DArray<T>(T[,] array, int n, T defaultValue)
+        {
+            for (int row = 0; row < n; row++)
+            {
+                for (int col = 0; col < n; col++)
+                {
+                    array[row, col] = defaultValue;
+                }
+            }
+        }
+
+        public static void Initialise1DArray<T>(T[] array, int n, T defaultValue)
+        {
+            for (int col = 0; col < n; col++)
+            {
+                array[col] = defaultValue;
+            }
+        }
+                
     }
 }

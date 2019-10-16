@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LeetCode_Problems
+namespace LeetCodeProblems
 {
     struct Edge
     {
@@ -136,6 +136,24 @@ namespace LeetCode_Problems
             return edges;
         }
 
+        private List<Edge> GetSortedEdges(int[,] graph, int vertextCount)
+        {
+            List<Edge> edges = new List<Edge>();
+
+            for (int row = 0; row < vertextCount; row++)
+            {
+                for (int col = 0; col < vertextCount; col++)
+                {
+                    if (graph[row, col] != 0)
+                    {
+                        edges.Add(new Edge(row, col, graph[row, col]));
+                    }
+                }
+            }
+
+            return edges;
+        }
+
         /// <summary>
         /// Floyd-Warshall Algorithm is best suited for dense graphs since its complexity depends only on the number of vertices in the graph.
         /// For sparse graphs, Johnson’s Algorithm is more suitable.
@@ -190,6 +208,7 @@ namespace LeetCode_Problems
                         {
                             if (matrix[row, col] > previousMatrix[row, i] + previousMatrix[i, col])
                             {
+
                                 matrix[row, col] = previousMatrix[row, i] + previousMatrix[i, col];
                             }
                         }
@@ -203,5 +222,82 @@ namespace LeetCode_Problems
 
             return allPairsShortestPaths;
         }
+
+        public int[,] PrimAlgo_MinimumSpanningTree(int[,] graph, int source, int vertexCount)
+        {
+            int[,] minimumSpanningTree = new int[vertexCount, vertexCount];
+
+            Helper.MarkNoDirectEdges(graph, vertexCount);
+
+            Helper.Initialise2DArray(minimumSpanningTree, vertexCount, 0);
+
+            bool[] nodesVisited = new bool[vertexCount];
+
+            Helper.Initialise1DArray(nodesVisited, vertexCount, false);
+
+            UpdateShortestEdge(minimumSpanningTree, graph, nodesVisited, source, vertexCount);
+
+            return minimumSpanningTree;
+        }
+
+        private void UpdateShortestEdge(int[,] minimumSpanningTree, int[,] graph, bool[] nodesVisited, int currentNode, int vertexCount)
+        {
+            if(nodesVisited[currentNode] == true)
+            {
+                return;
+            }
+
+            nodesVisited[currentNode] = true;
+            int minimumWeight = int.MaxValue;
+            int shortestAdjacentNode = -1;
+
+            for (int iLoop = 0; iLoop < vertexCount; iLoop++)
+            {
+                if (nodesVisited[iLoop] == false)
+                    continue;
+
+                for (int adjacentNode = 0; adjacentNode < vertexCount; adjacentNode++)
+                {
+                    if (iLoop == adjacentNode) continue;
+
+                    if (graph[iLoop, adjacentNode] < minimumWeight && nodesVisited[adjacentNode] == false)
+                    {
+                        currentNode = iLoop;
+                        minimumWeight = graph[currentNode, adjacentNode];
+                        shortestAdjacentNode = adjacentNode;
+                    }
+                }
+            }
+
+            if (shortestAdjacentNode != -1)
+            {
+                minimumSpanningTree[currentNode, shortestAdjacentNode] = graph[currentNode, shortestAdjacentNode];
+
+                UpdateShortestEdge(minimumSpanningTree, graph, nodesVisited, shortestAdjacentNode, vertexCount);
+            }
+        }
+     
+        public int[,] KruskalAlgo_MinimumSpanningTree(int[,] graph, int vertexCount)
+        {
+            int[,] minimumSpanningTree = new int[vertexCount, vertexCount];
+            List<Edge> edges = GetEdges(graph, vertexCount);
+
+            int[] costs = new int[vertexCount];
+            int iLoop = 0;
+            foreach(Edge edge in edges)
+            {
+                costs[iLoop++] = edge.Cost;
+            }
+
+            
+
+            return minimumSpanningTree;
+        }
+
+        private void JoinVetices(int[,] graph, int[,] minimumSpanningTree, int vertexCount)
+        {
+
+        }
+
     }
 }

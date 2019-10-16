@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LeetCode_Problems
+namespace LeetCodeProblems
 {
     public class NQueensProblem
     {

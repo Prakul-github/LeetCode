@@ -1,16 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LeetCode_Problems
+namespace LeetCodeProblems
 {
     class Program
     {
         static void Main(string[] args)
         {
             // GraphTheory_AllPathsTraversal(); 
-            //GraphTheory_DijkstraAlgo();
-            //BellmanFord_ShortestPath();
-            GraphTheory_FloydWarshallAlgo();
+            // GraphTheory_DijkstraAlgo();
+            // BellmanFord_ShortestPath();
+            // GraphTheory_FloydWarshallAlgo();
+            GraphTheory_PrimAlgo();
+        }
+
+        private static void GraphTheory_PrimAlgo()
+        {
+            int[,] graph =  {
+                                { 0, 4, 0, 10, 2, 0, 0, 0 },
+                                { 4, 0, 18, 8, 0, 0 ,0, 0 },
+                                { 0, 18, 0, 11, 0, 0, 0, 19 },
+                                { 10, 8, 11, 0, 5, 0, 11, 9 },
+                                { 2, 0, 0 ,5, 0, 51, 0, 0 },
+                                { 0, 0, 0, 0, 51, 0, 1, 2 },
+                                { 0, 0, 0, 11, 0, 1, 0, 23 },
+                                { 0, 0,19, 9, 0, 2, 23, 0}
+                            };
+
+            ShortedPathAlgo algo = new ShortedPathAlgo();
+            int[,] solution = algo.PrimAlgo_MinimumSpanningTree(graph, 0, 8);
+
+            Console.WriteLine("FloydWarshall's algo");
+            Helper.Print2DArray(solution, 8);
+
+            Console.ReadLine();
         }
 
         static void GraphTheory_FloydWarshallAlgo()
@@ -88,7 +111,7 @@ namespace LeetCode_Problems
         {
             Console.WriteLine("Solution to GraphTheory_AllPathsTraversal Problem");
 
-            LeetCode_Problems.GraphTheory.Solution solution = new GraphTheory.Solution();
+            GraphTheory.Solution solution = new GraphTheory.Solution();
             IList<IList<int>> solutions = solution.AllPathsSourceTarget(new int[][] { new int[] { 1, 2 }, new int[] { 3 }, new int[] { 3 }, new int[] { } });
 
             foreach (List<int> s in solutions)

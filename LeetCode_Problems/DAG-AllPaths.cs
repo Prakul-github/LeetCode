@@ -6,7 +6,7 @@ using System.Text;
 /// <summary>
 /// 797. All Paths From Source to Target
 /// </summary>
-namespace LeetCode_Problems.GraphTheory
+namespace LeetCodeProblems.GraphTheory
 {
     public class Solution
     {

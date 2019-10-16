@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LeetCode_Problems.GraphTheory
+namespace LeetCodeProblems.GraphTheory
 {
     class Vertex 
     {
