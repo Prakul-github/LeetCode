@@ -134,25 +134,7 @@ namespace LeetCodeProblems
             }
 
             return edges;
-        }
-
-        private List<Edge> GetSortedEdges(int[,] graph, int vertextCount)
-        {
-            List<Edge> edges = new List<Edge>();
-
-            for (int row = 0; row < vertextCount; row++)
-            {
-                for (int col = 0; col < vertextCount; col++)
-                {
-                    if (graph[row, col] != 0)
-                    {
-                        edges.Add(new Edge(row, col, graph[row, col]));
-                    }
-                }
-            }
-
-            return edges;
-        }
+        }        
 
         /// <summary>
         /// Floyd-Warshall Algorithm is best suited for dense graphs since its complexity depends only on the number of vertices in the graph.
@@ -280,24 +262,63 @@ namespace LeetCodeProblems
         public int[,] KruskalAlgo_MinimumSpanningTree(int[,] graph, int vertexCount)
         {
             int[,] minimumSpanningTree = new int[vertexCount, vertexCount];
-            List<Edge> edges = GetEdges(graph, vertexCount);
 
-            int[] costs = new int[vertexCount];
-            int iLoop = 0;
+            Helper.Initialise2DArray(minimumSpanningTree, vertexCount, int.MaxValue);
+
+            List<Edge> edges = GetEdges(graph, vertexCount);
+            edges = GetSortedEdges(edges);
+
             foreach(Edge edge in edges)
             {
-                costs[iLoop++] = edge.Cost;
-            }
+                if(minimumSpanningTree[edge.Source, edge.Destination] > edge.Cost)
+                {
 
-            
+                }
+            }
 
             return minimumSpanningTree;
         }
 
-        private void JoinVetices(int[,] graph, int[,] minimumSpanningTree, int vertexCount)
+        private List<Edge> GetSortedEdges(List<Edge> edges)
         {
+            List<Edge> sortedEdges = new List<Edge>();
 
+            while(edges.Count > 0 )
+            {
+                Edge edge = edges[0];
+                edges.RemoveAt(0);
+                sortedEdges = InsertionSort(sortedEdges, edge);
+            }
+
+            return sortedEdges;
         }
+
+        private List<Edge> InsertionSort(List<Edge> edges, Edge edge)
+        {
+            List<Edge> sortedEdges = new List<Edge>();
+
+            if (edges.Count == 0)
+            {
+                sortedEdges.Add(edge);
+            }
+
+            foreach(Edge e in edges)
+            {
+                if(e.Cost < edge.Cost)
+                {
+                    sortedEdges.Add(e);
+                }
+                else
+                {
+                    sortedEdges.Add(edge);
+                    sortedEdges.Add(e);
+                }
+            }
+
+            return sortedEdges;
+        }
+
+        
 
     }
 }

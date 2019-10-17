@@ -111,7 +111,7 @@ namespace LeetCodeProblems
         {
             Console.WriteLine("Solution to GraphTheory_AllPathsTraversal Problem");
 
-            GraphTheory.Solution solution = new GraphTheory.Solution();
+            Solution solution = new Solution();
             IList<IList<int>> solutions = solution.AllPathsSourceTarget(new int[][] { new int[] { 1, 2 }, new int[] { 3 }, new int[] { 3 }, new int[] { } });
 
             foreach (List<int> s in solutions)
